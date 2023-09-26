@@ -3,15 +3,17 @@
 for i in {1..10}
 do
     echo $i
-    python3 bert_baseline_trainer.py \
-    --text_data_dir ./text_gold_dynabench_6124.csv \
-    --crowd_data_dir ./annotation_dynabench_6124.csv \
+    python3 training_pipeline_trainer.py \
+    --text_data_dir ../data/text_gold_dynabench.csv \
+    --crowd_data_dir ../data/annotation_dynabench_idx_coded.csv \
     --seed $i \
-    --output_dir ../outputs/dynabench/bert_baseline_new/seed_$i/ \
+    --output_dir ../outputs/dynabench/ctm/seed_$i/ \
+    --label_dict {0:_'not'_,_1:'hate'} \
     \
     --anno_pool mean \
     --anno_emb_freeze True \
     --max_anno_num 20 \
+    --anno_emb_dir ../embeddings/dynabench_annotator_tensor_ctm_10_train.pt \
     \
     --learning_rate 1e-5 \
     --lr_scheduler_type constant \
